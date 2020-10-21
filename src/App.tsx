@@ -1,8 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native';
+
+import Home from './pages/Home';
 
 function App() {
-  return <Text>asdf</Text>;
+  return <Home />;
 }
 
 export default App;
