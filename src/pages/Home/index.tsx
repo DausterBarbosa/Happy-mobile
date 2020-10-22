@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StatusBar} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 
@@ -16,6 +16,11 @@ function Home() {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
       <MapView
         style={styles.map}
         initialRegion={{
