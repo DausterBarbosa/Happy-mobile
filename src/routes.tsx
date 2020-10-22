@@ -17,7 +17,20 @@ function Routes() {
           component={Home}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerStyle: {
+              backgroundColor: '#F9FAFC',
+            },
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: '#8FA7B2',
+            },
+            headerTintColor: '#15B6D6',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
