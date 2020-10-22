@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
+
 import Icon from 'react-native-vector-icons/Feather';
 
 import MarkerIcon from '../../assets/icons/Local.png';
@@ -10,6 +12,8 @@ import MapView, {Marker, Callout} from 'react-native-maps';
 import styles from './styles';
 
 function Home() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <MapView
@@ -27,7 +31,9 @@ function Home() {
             x: 2.4,
             y: 0.8,
           }}>
-          <Callout tooltip={true}>
+          <Callout
+            tooltip={true}
+            onPress={() => navigation.navigate('Profile')}>
             <View style={styles.calloutStyle}>
               <Text style={styles.calloutText}>Lar das meninas</Text>
             </View>
