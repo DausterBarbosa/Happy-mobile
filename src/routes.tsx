@@ -25,6 +25,7 @@ function Routes() {
               backgroundColor: '#F9FAFC',
             },
             headerTitleAlign: 'center',
+            headerTitle: 'Orfanato',
             headerTitleStyle: {
               color: '#8FA7B2',
             },
