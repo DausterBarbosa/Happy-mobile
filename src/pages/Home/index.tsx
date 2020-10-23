@@ -42,7 +42,9 @@ function Home() {
       </MapView>
       <View style={styles.footer}>
         <Text style={styles.footerText}>2 orfanatos encontrados</Text>
-        <TouchableOpacity style={styles.footerButton}>
+        <TouchableOpacity
+          style={styles.footerButton}
+          onPress={() => navigation.navigate('RegisterMap')}>
           <Icon name="plus" color="#FFF" size={25} />
         </TouchableOpacity>
       </View>
