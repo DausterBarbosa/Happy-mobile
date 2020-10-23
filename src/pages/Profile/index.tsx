@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, ScrollView} from 'react-native';
+import {View, Image, Text, ScrollView, FlatList} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -10,15 +10,39 @@ import MarkerIcon from '../../assets/icons/Local.png';
 import styles from './styles';
 
 function Profile() {
+  const Data = [
+    {
+      id: 1,
+      url:
+        'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
+    },
+    {
+      id: 2,
+      url:
+        'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
+    },
+    {
+      id: 3,
+      url:
+        'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Image
-          style={styles.image}
-          source={{
-            uri:
-              'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
-          }}
+        <FlatList
+          horizontal
+          data={Data}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({item}) => (
+            <Image
+              style={styles.image}
+              source={{
+                uri: item.url,
+              }}
+            />
+          )}
         />
         <View style={styles.content}>
           <View>

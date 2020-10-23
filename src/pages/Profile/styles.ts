@@ -7,8 +7,10 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: '100%',
+    width: 376,
     height: 260,
+    resizeMode: 'contain',
+    marginRight: 10,
   },
 
   content: {
