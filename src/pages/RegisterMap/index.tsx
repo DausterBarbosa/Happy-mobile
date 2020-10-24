@@ -36,9 +36,11 @@ function RegisterMap() {
           />
         )}
       </MapView>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Próximo</Text>
-      </TouchableOpacity>
+      {position.latitude !== 0 && (
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Próximo</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
