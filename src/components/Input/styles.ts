@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     color: '#8FA7B2',
     fontSize: 15,
     fontWeight: '600',
+    marginTop: 20,
   },
 
   input: {
