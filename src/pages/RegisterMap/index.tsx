@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
+
 import MarkerIcon from '../../assets/icons/Local.png';
 
 import MapView, {Marker, MapEvent} from 'react-native-maps';
@@ -8,6 +10,8 @@ import MapView, {Marker, MapEvent} from 'react-native-maps';
 import styles from './styles';
 
 function RegisterMap() {
+  const navigation = useNavigation();
+
   const [position, setPosition] = useState({latitude: 0, longitude: 0});
 
   function handlePosition(event: MapEvent) {
@@ -37,7 +41,9 @@ function RegisterMap() {
         )}
       </MapView>
       {position.latitude !== 0 && (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('RegisterForm')}>
           <Text style={styles.buttonText}>Próximo</Text>
         </TouchableOpacity>
       )}
