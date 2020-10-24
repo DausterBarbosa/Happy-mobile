@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import RegisterMap from './pages/RegisterMap';
+import RegisterForm from './pages/RegisterForm';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,21 @@ function Routes() {
         <Stack.Screen
           name="RegisterMap"
           component={RegisterMap}
+          options={{
+            headerStyle: {
+              backgroundColor: '#F9FAFC',
+            },
+            headerTitleAlign: 'center',
+            headerTitle: 'Adicione um orfanato',
+            headerTitleStyle: {
+              color: '#8FA7B2',
+            },
+            headerTintColor: '#15B6D6',
+          }}
+        />
+        <Stack.Screen
+          name="RegisterForm"
+          component={RegisterForm}
           options={{
             headerStyle: {
               backgroundColor: '#F9FAFC',
