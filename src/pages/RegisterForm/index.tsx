@@ -36,6 +36,11 @@ function RegisterForm() {
     });
   }
 
+  function removeImage(index: number) {
+    images.splice(index, 1);
+    setImages([...images]);
+  }
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View>
@@ -45,15 +50,15 @@ function RegisterForm() {
         <Input label="Número de Whatsapp" />
         <View style={styles.fileContainer}>
           <Text style={styles.label}>Fotos</Text>
-          {images.map((image) => (
-            <View key={image.name} style={styles.imageContainer}>
+          {images.map((image, index) => (
+            <View key={index} style={styles.imageContainer}>
               <View style={styles.profileContainer}>
                 <Image source={{uri: image.path}} style={styles.image} />
                 <Text style={styles.imageName} numberOfLines={1}>
                   {image.name}
                 </Text>
               </View>
-              <BorderlessButton>
+              <BorderlessButton onPress={() => removeImage(index)}>
                 <Icon name="x" size={24} color="#FF669D" />
               </BorderlessButton>
             </View>
