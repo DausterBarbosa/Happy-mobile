@@ -69,7 +69,9 @@ function Home() {
         })}
       </MapView>
       <View style={styles.footer}>
-        <Text style={styles.footerText}>2 orfanatos encontrados</Text>
+        <Text style={styles.footerText}>
+          {locations.length} orfanatos encontrados
+        </Text>
         <TouchableOpacity
           style={styles.footerButton}
           onPress={() => navigation.navigate('RegisterMap')}>
