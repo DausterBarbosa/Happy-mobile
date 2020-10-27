@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Image, Text, ScrollView, FlatList} from 'react-native';
 
+import {useRoute} from '@react-navigation/native';
+
 import Icon from 'react-native-vector-icons/Feather';
 
 import MapView, {Marker} from 'react-native-maps';
@@ -9,31 +11,37 @@ import MarkerIcon from '../../assets/icons/Local.png';
 
 import styles from './styles';
 
+interface ImageProps {
+  id: number;
+  url: string;
+}
+
+interface RouteParams {
+  key: string;
+  name: string;
+  params: {
+    location: {
+      name: string;
+      about: string;
+      instructions: string;
+      latitude: number;
+      longitude: number;
+      opening_hours: string;
+      open_in_weekends: boolean;
+      images: Array<ImageProps>;
+    };
+  };
+}
+
 function Profile() {
-  const Data = [
-    {
-      id: 1,
-      url:
-        'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
-    },
-    {
-      id: 2,
-      url:
-        'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
-    },
-    {
-      id: 3,
-      url:
-        'https://f.i.uol.com.br/fotografia/2018/07/26/15326507755b5a65177921a_1532650775_3x2_rt.jpg',
-    },
-  ];
+  const {params} = useRoute<RouteParams>();
 
   return (
     <View style={styles.container}>
       <ScrollView>
         <FlatList
           horizontal
-          data={Data}
+          data={params.location.images}
           keyExtractor={(item) => String(item.id)}
           renderItem={({item}) => (
             <Image
@@ -46,18 +54,15 @@ function Profile() {
         />
         <View style={styles.content}>
           <View>
-            <Text style={styles.title}>Orf.Esperança</Text>
-            <Text style={styles.about}>
-              Presta assistência a crianças de 06 a 15 anos que se encontre em
-              situação de risco e/ou vulnerabilidade social.
-            </Text>
+            <Text style={styles.title}>{params.location.name}</Text>
+            <Text style={styles.about}>{params.location.about}</Text>
           </View>
           <View style={styles.orphanageLocation}>
             <MapView
               style={styles.map}
               initialRegion={{
-                latitude: -3.5552224,
-                longitude: -41.1272681,
+                latitude: params.location.latitude,
+                longitude: params.location.longitude,
                 latitudeDelta: 0.008,
                 longitudeDelta: 0.008,
               }}>
@@ -72,18 +77,33 @@ function Profile() {
             <Text style={styles.instructionsTitle}>
               Instruções para a visita
             </Text>
-            <Text style={styles.about}>
-              Venha como se sentir a vontade e traga muito amor e paciência para
-              dar.
-            </Text>
+            <Text style={styles.about}>{params.location.instructions}</Text>
             <View style={styles.instructionsBoxes}>
               <View style={styles.box}>
                 <Icon name="clock" size={40} color="#2AB5D1" />
-                <Text style={styles.boxText}>Segunda à Sexta 8h às 18h</Text>
+                <Text style={styles.boxText}>
+                  {params.location.opening_hours}
+                </Text>
               </View>
-              <View style={[styles.box, styles.openWeekend]}>
-                <Icon name="alert-circle" size={40} color="#2AB5D1" />
-                <Text style={styles.boxText}>Atendemos fim de semana</Text>
+              <View
+                style={[
+                  styles.box,
+                  params.location.open_in_weekends
+                    ? styles.openWeekend
+                    : styles.closeWeekend,
+                ]}>
+                <Icon
+                  name="alert-circle"
+                  size={40}
+                  color={
+                    params.location.open_in_weekends ? '#2AB5D1' : '#FF669D'
+                  }
+                />
+                <Text style={styles.boxText}>
+                  {params.location.open_in_weekends
+                    ? 'Atendemos fim de semana'
+                    : 'Não atendemos fim de semana'}
+                </Text>
               </View>
             </View>
           </View>

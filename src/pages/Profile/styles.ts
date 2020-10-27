@@ -91,6 +91,10 @@ const styles = StyleSheet.create({
   openWeekend: {
     backgroundColor: '#EDFFF6',
   },
+
+  closeWeekend: {
+    backgroundColor: '#FFE4EE',
+  },
 });
 
 export default styles;
