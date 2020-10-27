@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
+
+import Api from '../../services/Api';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -11,8 +13,26 @@ import MapView, {Marker, Callout} from 'react-native-maps';
 
 import styles from './styles';
 
+interface LocationProps {
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+}
+
 function Home() {
   const navigation = useNavigation();
+
+  const [locations, setLocations] = useState<LocationProps[]>([]);
+
+  useEffect(() => {
+    async function getLocations() {
+      const response = await Api.get('/orphanages');
+      setLocations(response.data);
+    }
+
+    getLocations();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -24,21 +44,29 @@ function Home() {
           latitudeDelta: 0.008,
           longitudeDelta: 0.008,
         }}>
-        <Marker
-          coordinate={{latitude: -3.5552224, longitude: -41.1272681}}
-          icon={MarkerIcon}
-          calloutAnchor={{
-            x: 2.4,
-            y: 0.8,
-          }}>
-          <Callout
-            tooltip={true}
-            onPress={() => navigation.navigate('Profile')}>
-            <View style={styles.calloutStyle}>
-              <Text style={styles.calloutText}>Lar das meninas</Text>
-            </View>
-          </Callout>
-        </Marker>
+        {locations.map((location) => {
+          return (
+            <Marker
+              key={location.id}
+              coordinate={{
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }}
+              icon={MarkerIcon}
+              calloutAnchor={{
+                x: 2.4,
+                y: 0.8,
+              }}>
+              <Callout
+                tooltip={true}
+                onPress={() => navigation.navigate('Profile', {location})}>
+                <View style={styles.calloutStyle}>
+                  <Text style={styles.calloutText}>{location.name}</Text>
+                </View>
+              </Callout>
+            </Marker>
+          );
+        })}
       </MapView>
       <View style={styles.footer}>
         <Text style={styles.footerText}>2 orfanatos encontrados</Text>
