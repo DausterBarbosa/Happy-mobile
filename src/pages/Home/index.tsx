@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
 import Api from '../../services/Api';
 
@@ -25,14 +25,18 @@ function Home() {
 
   const [locations, setLocations] = useState<LocationProps[]>([]);
 
-  useEffect(() => {
-    async function getLocations() {
-      const response = await Api.get('/orphanages');
-      setLocations(response.data);
-    }
+  async function getLocations() {
+    const response = await Api.get('/orphanages');
+    setLocations(response.data);
+  }
 
+  useEffect(() => {
     getLocations();
   }, []);
+
+  useFocusEffect(() => {
+    getLocations();
+  });
 
   return (
     <View style={styles.container}>
