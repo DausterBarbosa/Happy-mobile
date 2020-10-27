@@ -43,7 +43,7 @@ function RegisterMap() {
       {position.latitude !== 0 && (
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('RegisterForm')}>
+          onPress={() => navigation.navigate('RegisterForm', {position})}>
           <Text style={styles.buttonText}>Próximo</Text>
         </TouchableOpacity>
       )}
